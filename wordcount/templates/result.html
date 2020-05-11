@@ -30,6 +30,7 @@
         .container{
             margin: 50px auto;
             background-color: lightgray;
+            padding: 10px auto 10px auto;
         }
         .kind{
             color: lightcoral;
@@ -38,12 +39,27 @@
         .container>div{
             margin: 10px auto;
         }
+        .top{
+            display : flex;
+            /* align-self: auto; */
+            width: 100%;
+            /* position:fixed; */
+        }
+        .btn-danger{
+            float: right;
+        }
+        .top > .kind{
+            float:left;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="sentence">
-            <h2 class = 'kind'>당신이 입력한 텍스트</h2>
+            <div class = "top">
+                <h2 class = 'kind'>당신이 입력한 텍스트</h2>
+                <h4><a href="{%url 'home'%}"> <button type="button" class="btn-danger">다시 시도하기</button></a></h4>
+            </div>
             <h5>{{text}}</h5>
             전체 단어 수 >> {{length}}
         </div>
@@ -55,13 +71,25 @@
 
         <div class= "result">
             <h2 class="kind">단어 계수 check!</h2>
-            {% for key,value in word_dict %}
-            <br>
-            {{key}} : {{value}}
-            {% endfor %}
+            <table class="table">
+                <tr>
+                    <!-- <th>#</th> -->
+                    <th>단어</th>
+                    <th>갯수</th>
+                </tr>
+                {% for key,value in word_dict %}
+                <tr>
+                    <!-- <td>{i</td> -->
+                    <td>{{key}} </td>
+                    <td>{{value}}</td>
+                </tr>
+                {% endfor %}
+
+            </table>
+            
+            
         </div>
 
-        <h3><a href="{%url 'home'%}" role="button">다시 시도하기</a></h3>
     </div>
 </body>
 </html>
