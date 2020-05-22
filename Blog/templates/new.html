@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Blog_m의 column과 같은 입력 받아야함 -> Blog_m의 객체가 될것이기 때문 -->
+    <h1>새로운 내용 입력받는 페이지</h1>
+
+    <form action="{%url 'create'%}" method="POST">
+        {% csrf_token%} 
+
+        <p> 제목 : <input name = 'title' type="text" placeholder="제목을 입력하시오."></p>
+        <p> 내용 : <textarea name="body" id="" cols="30" rows="10" placeholder="이곳에 내용을 입력하시오"></textarea></p>
+        <button type="submit"> 등록 </button>
+
+    <!-- </form>
+    <form action="{%url 'update'  ">
+        <p>제목 : <input type="text" name="edit_title">{{edit_wirting.title}}</p>
+        <p>내용 : <textarea name="edit_body" id="" cols="30" rows="10">{{edit_wirting.body}}</textarea></p>
+        <button type="submit">수정</button>
+    </form> -->
+
+ 
+</body>
+</html>

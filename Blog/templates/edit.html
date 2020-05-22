@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>edit 페이지</h1>
+    <form action="{%url 'update' edit_writing.id%}" method="POST">
+        {% csrf_token %}
+
+        <p>제목 : <input type="text" name = "edit_title" value = '{{edit_writing.title}}'></p>
+        <p>내용 : <textarea name="edit_body" id="" cols="30" rows="10">{{edit_writing.body}}</textarea></p>
+        <button type="submit">수정완료</button>
+    </form>
+</body>
+</html>

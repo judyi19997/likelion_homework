@@ -16,9 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import wordcount.views
+import Blog.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', wordcount.views.home, name = "home"),
+    path('wordcount/', wordcount.views.wordcount, name = "wordcount"),
     path('result/',wordcount.views.result, name = "result"),
+    path('', Blog.views.begin, name="begin"),
+    path('blog/<int:blog_id>',Blog.views.detail, name = "detail"),
+    path('blog/new',Blog.views.new, name = "new"),
+    path('blog/create',Blog.views.create, name = "create"),
+    path('blog/update/<int:select_id>',Blog.views.update, name = "update"),
+    path('blog/edit/<int:select_id>',Blog.views.edit, name = "edit"),
+    path('blog/delete/<int:select_id>',Blog.views.delete, name = 'delete'),
 ]

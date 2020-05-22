@@ -2,8 +2,8 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def home(request):
-    return render(request, 'home.html')
+def wordcount(request):
+    return render(request, 'wordcount.html')
 
 def result(request):
     text = request.GET['fullText']
