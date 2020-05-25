@@ -6,15 +6,18 @@
     <title>Document</title>
 </head>
 <body>
+    {%load static%}
     <!-- Blog_m의 column과 같은 입력 받아야함 -> Blog_m의 객체가 될것이기 때문 -->
-    <h1>새로운 내용 입력받는 페이지</h1>
+    <img src="{% static '더미덤.gif' %}" alt="">
 
-    <form action="{%url 'create'%}" method="POST">
+    <h1>새로운 내용 입력받는 페이지</h1>
+    
+    <!-- <form action="{%url 'create'%}" method="POST">
         {% csrf_token%} 
 
         <p> 제목 : <input name = 'title' type="text" placeholder="제목을 입력하시오."></p>
         <p> 내용 : <textarea name="body" id="" cols="30" rows="10" placeholder="이곳에 내용을 입력하시오"></textarea></p>
-        <button type="submit"> 등록 </button>
+        <button type="submit"> 등록 </button> -->
 
     <!-- </form>
     <form action="{%url 'update'  ">
@@ -23,6 +26,15 @@
         <button type="submit">수정</button>
     </form> -->
 
+    <!-- form.py 이용해서 만든 html -->
+    <form method="POST", enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{form_obj.as_table}}
+        </table>
+        
+        <button type="submit">제출</button>
+    </form>
  
 </body>
 </html>

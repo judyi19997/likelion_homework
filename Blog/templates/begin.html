@@ -10,13 +10,15 @@
     <a href="{%url 'new'%}">새글 등록하기</a>
     <br>
     <!-- {{writings}} -->
-    {%for wirting in writings %}
+    {%for writing in writings %}
     <hr>
-    <a href="{%url 'detail' wirting.id%}">
-        <h3>{{wirting.title}}</h3>
+    <a href="{%url 'detail' writing.id%}">
+        <h3>{{writing.title}}</h3>
     </a>
-    <p>{{wirting.pub_date}}</p>
-    <p>{{wirting.summary}}</p>
+    <p>{{writing.pub_date}}</p>
+    <p>{{writing.summary}}</p>
+    <br>
+    <img src="{{writing.image.url}}" alt="">
 
     {% endfor %}
 </body>

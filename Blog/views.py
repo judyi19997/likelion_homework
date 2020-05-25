@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import Blog_m
 from django.utils import timezone
+from .form import Blog_f
 
 # Create your views here.
 def begin(request):
@@ -14,8 +15,22 @@ def detail(request,blog_id):
 
 #Creat
 def new(request):
-    editing = 0
-    return render(request, 'new.html',{'editing':editing})
+    # editing = 0
+    # return render(request, 'new.html',{'editing':editing})
+#입력받은걸 넘기는 작업
+    if request.method == 'POST':
+        input_obj = Blog_f(request.POST, request.FILES)
+        if input_obj.is_valid(): #전달받은 form값이 유효하다면 True 반환
+            temp_save = input_obj.save(commit = False) #임시저장
+            temp_save.pub_date = timezone.datetime.now()
+            temp_save.save()
+            return redirect ('begin')
+
+#begin.html -> new.html로 넘어가는 작업. method 는 get
+    else:
+        form_obj = Blog_f()
+        return render (request, 'new.html', {'form_obj':form_obj})
+        
 
 def create(request):
     new_writing = Blog_m() #객체 생성
@@ -49,5 +64,5 @@ def update(request, select_id):
 def delete(request,select_id):
     item = get_object_or_404(Blog_m, pk = select_id)
     item.delete()
-    return redirect('begin')
+    return redirect('/')
 

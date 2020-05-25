@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 import wordcount.views
 import Blog.views
 
@@ -29,4 +31,5 @@ urlpatterns = [
     path('blog/update/<int:select_id>',Blog.views.update, name = "update"),
     path('blog/edit/<int:select_id>',Blog.views.edit, name = "edit"),
     path('blog/delete/<int:select_id>',Blog.views.delete, name = 'delete'),
-]
+] 
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) #media url
