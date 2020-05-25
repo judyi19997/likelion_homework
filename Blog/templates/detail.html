@@ -6,12 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>detail 페이지 </h1>
+    <h1>더보기 페이지 </h1>
+    <img src="{{select.image.url}}" alt="">
+    <hr>
     <h3>{{select.title}}</h3>
     <hr>
     <p>{{select.pub_date}}</p>
     <hr>
     <p>{{select.body}}</p>
+   
 
     <a href="{%url 'begin'%}">시작화면으로 가기</a>
     <a href="{%url 'edit' select.id%}">수정하기</a>
