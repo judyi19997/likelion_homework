@@ -4,23 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            background-color: peachpuff;
+        }
+        .title{
+            display: flex;
+        }
+    </style>
 </head>
 <body>
     {%load static%}
     
     <img src="{% static '더미덤5.gif'%}" alt="">
-    <h1>지희의 하루</h1>
-    <button><a href="{%url 'new'%}">새글 등록하기</a></button>
+    <h1 >지희의 daily★</h1>
+    <button class = 'title' ><a href="{%url 'new'%}">새글 등록하기</a></button>
     <br>
     <!-- {{writings}} -->
     {%for writing in writings %}
     <hr>
-    <button><a href="{%url 'detail' writing.id%}">더보기</a></button>
+    
     <h3>{{writing.title}}</h3>
+    <button class = 'title'><a href="{%url 'detail' writing.id%}">더보기</a></button>
     <p>{{writing.pub_date}}</p>
     <p>{{writing.summary}}</p>
     <br>
-    <img src="{{writing.image.url}}" alt="">
+    {%if writing.image%}
+        <img src="{{writing.image.url}}" alt="">
+    {%endif%}
 
     {% endfor %}
 </body>
