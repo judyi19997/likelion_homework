@@ -2,11 +2,12 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.forms import AuthenticationForm #로그인 관련 form
 from django.contrib.auth.forms import UserCreationForm #회원가입 관련 form
 from django.contrib.auth import login, authenticate, logout
+from .forms import loginForm, registerForm
 
 # Create your views here.
 def make_login(request):
     if request.method == "POST": #정보 입력 완료 후 상태.
-        complete_form = AuthenticationForm(request = request, data = request.POST)
+        complete_form = loginForm(request = request, data = request.POST)
         # if complete_form.is_valid():
         #     complete_form.save()
         #     user = authenticate(request = request)
@@ -21,7 +22,7 @@ def make_login(request):
 
 
     else: #막 페이지 들어간 상태
-        login_form = AuthenticationForm()
+        login_form = loginForm()
         return render(request, 'login.html', {'new_form' : login_form})
 
 def make_logout(request):
@@ -32,10 +33,10 @@ def make_logout(request):
 def make_register(request):
     
     if request.method == 'POST':
-        register_form = UserCreationForm(request.POST)
+        register_form = registerForm(request.POST)
         user = register_form.save()
         return redirect ('begin')
     else:
-        new_form = UserCreationForm()
+        new_form = registerForm()
         return render (request, 'login.html', {'new_form':new_form})
 
