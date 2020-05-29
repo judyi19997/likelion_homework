@@ -17,8 +17,19 @@
     {%load static%}
     
     <img src="{% static '더미덤5.gif'%}" alt="">
-    <h1 >지희의 daily★</h1>
+    <h1 >오늘은 daily★</h1>
+
+    
+    {% if user.is_authenticated %}
     <button class = 'title' ><a href="{%url 'new'%}">새글 등록하기</a></button>
+    <button><a href="{%url 'logout'%}">로그아웃 하기</a></button>
+    <h5>반갑습니다. {{user.username}}님</h5>
+    {%else%}
+    <button class = 'title'><a href="{%url 'login'%}">로그인 하기.</a></button>
+    <button><a href="{%url 'signup'%}">회원가입 하기</a></button>
+    
+    {%endif%}
+    
     <br>
     <!-- {{writings}} -->
     {%for writing in writings %}
