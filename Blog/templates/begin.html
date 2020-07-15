@@ -41,6 +41,7 @@
     <button class = 'title'><a href="{%url 'detail' writing.id%}">더보기</a></button>
     <p>{{writing.pub_date}}</p>
     <p>{{writing.summary}}</p>
+    <p>작성자 : {{writing.writer}}</p>
     <br>
     {%if writing.image%}
         <img src="{{writing.image.url}}" alt="">

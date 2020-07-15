@@ -20,9 +20,12 @@ def new(request):
 #입력받은걸 넘기는 작업
     if request.method == 'POST':
         input_obj = Blog_f(request.POST, request.FILES)
+
         if input_obj.is_valid(): #전달받은 form값이 유효하다면 True 반환
+            blog_wirter = request.user
             temp_save = input_obj.save(commit = False) #임시저장
             temp_save.pub_date = timezone.datetime.now()
+            temp_save.writer = blog_wirter
             temp_save.save()
             return redirect ('begin')
 
