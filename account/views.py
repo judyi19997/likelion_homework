@@ -1,8 +1,9 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm #로그인 관련 form
 from django.contrib.auth.forms import UserCreationForm #회원가입 관련 form
+from django.contrib.auth.forms import UserChangeForm #유저정부 수정 관련 form
 from django.contrib.auth import login, authenticate, logout
-from .forms import loginForm, registerForm
+from .forms import loginForm, registerForm, changeForm
 
 # Create your views here.
 def make_login(request):
@@ -31,7 +32,6 @@ def make_logout(request):
 
 
 def make_register(request):
-    
     if request.method == 'POST':
         register_form = registerForm(request.POST)
         user = register_form.save()
@@ -39,4 +39,17 @@ def make_register(request):
     else:
         new_form = registerForm()
         return render (request, 'login.html', {'new_form':new_form})
+
+def make_change(request):
+    # unchanged_form = get_object_or_404(changeForm, pk = change)
+
+    if request.method =='POST': #다 끝난 후 제출할때
+        change_form = changeForm(request.POST, instance = request.user)
+        if change_form.is_valid():
+            user = change_form.save()
+            return redirect('begin')
+    else:
+        newChange_form = changeForm(instance = request.user)
+        return render (request,'login.html',{'new_form':newChange_form})
+
 

@@ -17,12 +17,13 @@
     {%load static%}
     
     <img src="{% static '더미덤5.gif'%}" alt="">
-    <h1 >오늘은 daily★</h1>
+    <h1 >시계는 watch★</h1>
 
     
     {% if user.is_authenticated %}
     <button class = 'title' ><a href="{%url 'new'%}">새글 등록하기</a></button>
     <button><a href="{%url 'logout'%}">로그아웃 하기</a></button>
+    <button><a href="{%url 'change'%}">유저정보 수정</a></button>
     <h3>반갑습니다. {{user.username}}님</h3>
     <h5>{{user.birthday}}</h5>
     <h5>{{user.gender}}</h5>

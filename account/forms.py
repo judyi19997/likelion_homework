@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm,UserCreationForm #기본 form들
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm,UserChangeForm #기본 form들
 from django.contrib.auth import get_user_model
 # from .models import custom_model - 비효율적
 
@@ -13,3 +13,9 @@ class registerForm(UserCreationForm):
     class Meta:
         model = user
         fields = ['username', 'password1','password2','email','birthday','gender']
+
+class changeForm(UserChangeForm):
+
+    class Meta:
+        model = user
+        fields = ['username', 'email', 'birthday', 'gender']
