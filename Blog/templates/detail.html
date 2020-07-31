@@ -26,5 +26,21 @@
     <button><a href="{%url 'edit' select.id%}">수정하기</a></button>
     <button><a href="{%url 'delete' select.id%}">삭제하기</a></button>
 
+
+    <hr>
+    <h5>댓글</h5>
+    <form action="{% url 'commenting' select.id %}" method = 'POST'>
+        {%csrf_token%}
+        <input type="text" name = body>
+        <button type="submit">작성</button>
+    </form>
+    <hr>
+    {%for comment in comments%}
+    작성자 : {{comment.commentAuthor}}
+    <br>{{comment.body}}
+    <br>{{comment.pub_date}}
+    <hr>
+    <br>{%endfor%}
+
 </body>
 </html>

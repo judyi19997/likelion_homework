@@ -18,7 +18,7 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 import wordcount.views
-import Blog.views
+import Blog.urls
 import account.urls
 
 urlpatterns = [
@@ -26,12 +26,7 @@ urlpatterns = [
     path('wordcount/', wordcount.views.wordcount, name = "wordcount"),
     path('result/',wordcount.views.result, name = "result"),
     path('', Blog.views.begin, name="begin"),
-    path('blog/<int:blog_id>',Blog.views.detail, name = "detail"),
-    path('blog/new',Blog.views.new, name = "new"),
-    path('blog/create',Blog.views.create, name = "create"),
-    path('blog/update/<int:select_id>',Blog.views.update, name = "update"),
-    path('blog/edit/<int:select_id>',Blog.views.edit, name = "edit"),
-    path('blog/delete/<int:select_id>',Blog.views.delete, name = 'delete'),
+    path('blog/', include(Blog.urls)),
     path('account/', include(account.urls)),
 ] 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) #media url

@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -16,3 +17,13 @@ class Blog_m(models.Model):
 
     def summary(self):
         return self.body[:100]
+
+# Fore
+class Comment_m(models.Model):
+    commentBlog = models.ForeignKey(Blog_m, on_delete = models.CASCADE)
+    commentAuthor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.SET_NULL, null = True, blank = True)
+    pub_date = models.DateTimeField(auto_now_add = True)
+    body = models.TextField()
+
+    def __str__(self):
+        return f"'{self.commentBlog}'에 '{self.commentAuthor}'님이 단 댓글"
