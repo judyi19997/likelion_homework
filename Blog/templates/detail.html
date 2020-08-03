@@ -27,6 +27,12 @@
     <button><a href="{%url 'delete' select.id%}">삭제하기</a></button>
     <button><a href="{%url 'likes' select.id %}">추천하기</a></button>
     <p>{{like_num}}명이 추천중입니다.</p>
+    {% if messages %}
+    {% for message in messages %}
+       {{ message.tags }}
+       {{ message.message }}
+    {% endfor %}
+     {% endif %}
 
 
     <hr>

@@ -2,6 +2,8 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .models import Blog_m,Comment_m
 from django.utils import timezone
 from .form import Blog_f
+from django.contrib import messages
+
 
 # Create your views here.
 def begin(request):
@@ -25,10 +27,14 @@ def commenting(request, select_id):
     return redirect('/blog/' + str(select_id))  
 
 def likes(request,select_id):
-    recommend_blog = get_object_or_404(Blog_m, pk = select_id) 
-    recommend_blog.like.add(request.user)
-    recommend_blog.save()
-    return redirect('/blog/' + str(select_id))
+    if request.user.is_authenticated:
+        recommend_blog = get_object_or_404(Blog_m, pk = select_id) 
+        recommend_blog.like.add(request.user)
+        recommend_blog.save()
+        return redirect('/blog/' + str(select_id))
+    else:
+        messages.error(request,'추천을 위해선 로그인이 필요합니다.')
+        return redirect('login')
 
 
 #Creat
@@ -70,8 +76,13 @@ def create(request):
 # # def update(request, select_id):
 
 def edit (request, select_id):
-    edit_writing = get_object_or_404(Blog_m, pk = select_id)
-    return render(request, 'edit.html', {'edit_writing' : edit_writing})
+    if request.user.is_authenticated:
+        edit_writing = get_object_or_404(Blog_m, pk = select_id)
+        return render(request, 'edit.html', {'edit_writing' : edit_writing})
+    else:
+        messages.error(request,'수정을 위해선 로그인이 필요합니다.')
+        return redirect('login')
+
 
 def update(request, select_id):
     edit_writing = get_object_or_404(Blog_m, pk = select_id)
@@ -83,7 +94,12 @@ def update(request, select_id):
 
 # Delete
 def delete(request,select_id):
-    item = get_object_or_404(Blog_m, pk = select_id)
-    item.delete()
-    return redirect('/')
+    if request.user.is_authenticated:
+        item = get_object_or_404(Blog_m, pk = select_id)
+        item.delete()
+        return redirect('/')
+    else:
+        messages.error(request,'삭제를 위해선 로그인이 필요합니다.')
+        return redirect('login')
+
 

@@ -4,6 +4,8 @@ from django.contrib.auth.forms import UserCreationForm #회원가입 관련 form
 from django.contrib.auth.forms import UserChangeForm #유저정부 수정 관련 form
 from django.contrib.auth import login, authenticate, logout
 from .forms import loginForm, registerForm, changeForm
+from django.contrib import messages
+
 
 # Create your views here.
 def make_login(request):
@@ -20,6 +22,9 @@ def make_login(request):
             if user is not None: #user가 잘 만들어진거면
                 login(request, user)
                 return redirect('begin')
+        else:
+            messages.error(request,"ID와 PW를 다시 확인해주세요.")
+            return redirect('login')
 
 
     else: #막 페이지 들어간 상태
