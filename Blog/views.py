@@ -12,7 +12,8 @@ def begin(request):
 def detail(request,blog_id):
     select = get_object_or_404(Blog_m,pk = blog_id) #해당 키의 객체를 select에 담는다.
     comments = Comment_m.objects.filter(commentBlog = select)
-    return render(request, 'detail.html',{'select':select, 'comments':comments})
+    like_num = len(select.like.all())
+    return render(request, 'detail.html',{'select':select, 'comments':comments, 'like_num':like_num})
 
 # forms.py 사용 안하고 그냥 form태그로 받아올때
 def commenting(request, select_id):
@@ -22,6 +23,13 @@ def commenting(request, select_id):
     new_comment.body = request.POST.get('body')  
     new_comment.save()
     return redirect('/blog/' + str(select_id))  
+
+def likes(request,select_id):
+    recommend_blog = get_object_or_404(Blog_m, pk = select_id) 
+    recommend_blog.like.add(request.user)
+    recommend_blog.save()
+    return redirect('/blog/' + str(select_id))
+
 
 #Creat
 def new(request):
